@@ -13,7 +13,6 @@ public class Tree {
 
         Node(int value){
             this.value = value;
-            rightChild = leftChild = null;
         }
 
         @Override
@@ -23,25 +22,30 @@ public class Tree {
     }
     
 
-    public void insert(int item) { // 5
-        if (root == null)
-            root = new Node(item);
+    public void insert(int item) { 
+        var node = new Node(item);
 
-        var current = root; //7
-        while (true) { //7 4 6
-            if(current.value < item){ //7>5 4<5 6>5
-                if(current.rightChild != null) //6!=null
-                    current = current.rightChild; //6
-                
-                current.rightChild = new Node(item); 
-                break;
+        if (root == null){
+            root = node;
+            return;
+        }
+            
+
+        var current = root; 
+        while (true) { 
+            if(item > current.value  ){ 
+                if(current.rightChild == null){ 
+                    current.rightChild = node; 
+                    break;
+                }
+                current = current.rightChild;
             }
-            else{         //7>5 6>5
-                if(current.leftChild != null) //4!=null 
-                    current = current.leftChild;//4
-
-                current.leftChild = new Node(item);//5 
-                break;  
+            else{         
+                if(current.leftChild == null){
+                    current.leftChild = node;
+                    break;
+                }
+                current = current.leftChild;     
             }
         }
     }
@@ -61,5 +65,18 @@ public class Tree {
                 current = current.leftChild;
         }
         return false;
+    }
+
+    // overload to pass the private parameter root
+    public void PreOrdertraversal(){
+        PreOrdertraversal(root);
+    }
+    private void PreOrdertraversal(Node root){
+        // root left right
+        if(root == null)
+            return; // end of recursion
+        System.out.println(root.value);
+        PreOrdertraversal(root.leftChild);
+        PreOrdertraversal(root.rightChild);
     }
 }
