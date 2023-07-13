@@ -30,7 +30,7 @@ public class HashTableScratch {
         
         /* to avoid duplicate values, traverse through 
          * each bucket and look for keys, 
-         * if duplicate, update the value */
+         * if duplicate update the value */
 
         var bucket = entries[index];
         for (var entry: bucket ) {
