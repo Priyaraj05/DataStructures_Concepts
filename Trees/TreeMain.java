@@ -1,4 +1,4 @@
-package DS.Trees;
+
 
 public class TreeMain {
     public static void main(String[] args) {
@@ -24,7 +24,21 @@ public class TreeMain {
         
         System.out.println("Height: " + tree.HeightOfTree());
         System.out.println("Maximum value in tree: " + tree.MaxOfBinaryTree());
-        System.out.println("Maximum value: "+ tree.MaxOfBST());
+        System.out.println("Maximum value: " + tree.MaxOfBST());
+
+        ScratchTree tree2 = new ScratchTree();
+        tree2.insert(7);
+        tree2.insert(4);
+        tree2.insert(9);
+        tree2.insert(1);
+        tree2.insert(6);
+        tree2.insert(8);
+        tree2.insert(10);
+        
+        if(tree.EqualityCheck(tree2)) 
+            System.out.println("they are equal");
+        else
+            System.out.println("they are not equal");
 
     }
 }

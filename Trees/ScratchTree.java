@@ -1,120 +1,118 @@
-package DS.Trees;
+
 
 import java.security.Provider;
 
 public class ScratchTree {
 
     private Node root;
-    
-    private class Node{
+
+    private class Node {
         private int value;
         private Node leftChild;
         private Node rightChild;
 
-        Node(int value){
+        Node(int value) {
             this.value = value;
         }
 
         @Override
         public String toString() {
-            return "Node="+value;
-        }    
+            return "Node=" + value;
+        }
     }
-    
 
-    public void insert(int item) { 
+    public void insert(int item) {
         var node = new Node(item);
 
-        if (root == null){
+        if (root == null) {
             root = node;
             return;
         }
-            
 
-        var current = root; 
-        while (true) { 
-            if(item > current.value){ 
-                if(current.rightChild == null){ 
-                    current.rightChild = node; 
+        var current = root;
+        while (true) {
+            if (item > current.value) {
+                if (current.rightChild == null) {
+                    current.rightChild = node;
                     break;
                 }
                 current = current.rightChild;
-            }
-            else{         
-                if(current.leftChild == null){
+            } else {
+                if (current.leftChild == null) {
                     current.leftChild = node;
                     break;
                 }
-                current = current.leftChild;     
+                current = current.leftChild;
             }
         }
     }
-    
 
     public boolean find(int value) {
-        if(root == null)
+        if (root == null)
             throw new IllegalStateException();
-        
+
         var current = root;
-        while(current != null){
-            if(current.value == value)
+        while (current != null) {
+            if (current.value == value)
                 return true;
-            else if(current.value < value)
+            else if (current.value < value)
                 current = current.rightChild;
-            else if(current.value > value)
+            else if (current.value > value)
                 current = current.leftChild;
         }
         return false;
     }
 
     // overload to pass the private parameter -  root
-    public void PreOrdertraversal(){
+    public void PreOrdertraversal() {
         PreOrdertraversal(root);
     }
-    
+
     /*         7
      *   4          9
      * 1    6    8      10
     */
-    private void PreOrdertraversal(Node root){
+    private void PreOrdertraversal(Node root) {
         // root left right
-        if(root == null)
+        if (root == null)
             return; // end of recursion
         System.out.println(root.value);
         PreOrdertraversal(root.leftChild);
         PreOrdertraversal(root.rightChild);
     }
 
-    public void InOrdertraversal(){
+    public void InOrdertraversal() {
         InOrdertraversal(root);
     }
-    private void InOrdertraversal(Node root){
+
+    private void InOrdertraversal(Node root) {
         // Left root right
-        if(root == null)
+        if (root == null)
             return;
 
-        InOrdertraversal(root.leftChild);  
+        InOrdertraversal(root.leftChild);
         System.out.println(root.value);
         InOrdertraversal(root.rightChild);
-        
+
     }
 
-    public void PostOrdertraversal(){
+    public void PostOrdertraversal() {
         PostOrdertraversal(root);
     }
-    private void PostOrdertraversal(Node root){
+
+    private void PostOrdertraversal(Node root) {
         // Left right root
-        if(root == null)
+        if (root == null)
             return;
 
-        PostOrdertraversal(root.leftChild);  
+        PostOrdertraversal(root.leftChild);
         PostOrdertraversal(root.rightChild);
         System.out.println(root.value);
-        
+
     }
 
     // height of the tree
-    public int HeightOfTree(){
+    public int HeightOfTree() {
         int height = HeightOfTree(root);
         return height;
     }
@@ -138,14 +136,13 @@ public class ScratchTree {
     private int MaxOfBST(Node root) {
         var current = root;
         var last = current;
-        while(current!= null){
+        while (current != null) {
             last = current;
-            current = current.leftChild;
+            current = current.rightChild;
         }
-        return last;
+        return last.value;
     }
-    
-    
+
     // To find a maximum value in the Binary Tree-> O(N)
 
     public int MaxOfBinaryTree() {
@@ -153,15 +150,46 @@ public class ScratchTree {
     }
 
     private int MaxOfBinaryTree(Node root) {
-        if(isLeaf(root))
+        if (isLeaf(root))
             return root.value;
 
         var leftMax = MaxOfBinaryTree(root.leftChild);
         var rightMax = MaxOfBinaryTree(root.rightChild);
-        return Math.max(Math.max(leftMax, rightMax),root.value);
+        return Math.max(Math.max(leftMax, rightMax), root.value);
     }
 
     public boolean isLeaf(Node root) {
         return root.leftChild == null && root.rightChild == null;
     }
+
+    /* Tree Equality Checking  ----- O(N)
+     * Checks if two given trees are same and identical
+     * Uses pre-order traversal
+     * example 
+     * Tree 1 :               Tree 2: 
+     *     1                        1  
+     *   /   \                    /   \
+     *  2     3                  2     1
+     * Order - [1,2,3]         Order -[1,2,1]
+     * They are not equal
+     */
+    public boolean EqualityCheck(ScratchTree other) {
+        if (other == null)
+            throw new NullPointerException();
+        return EqualityCheck(root, other.root);
+    }
+
+    private boolean EqualityCheck(Node firstRoot, Node secondRoot) {
+        if (firstRoot == null && secondRoot == null)
+            return true;
+
+        if (firstRoot != null && secondRoot != null) {
+            return (firstRoot.value == secondRoot.value)
+                    && (EqualityCheck(firstRoot.leftChild, secondRoot.leftChild))
+                    && (EqualityCheck(firstRoot.rightChild, secondRoot.rightChild));
+        }
+
+        return false;
+    }
+
 }
