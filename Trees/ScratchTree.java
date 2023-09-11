@@ -20,7 +20,7 @@ public class ScratchTree {
             return "Node=" + value;
         }
     }
-
+//#region insert node
     public void insert(int item) {
         var node = new Node(item);
 
@@ -46,22 +46,27 @@ public class ScratchTree {
             }
         }
     }
+    //#endregion
 
-    public boolean find(int value) {
-        if (root == null)
-            throw new IllegalStateException();
+//#region find node
+public boolean find(int value) {
+    if (root == null)
+        throw new IllegalStateException();
 
-        var current = root;
-        while (current != null) {
-            if (current.value == value)
-                return true;
-            else if (current.value < value)
-                current = current.rightChild;
-            else if (current.value > value)
-                current = current.leftChild;
-        }
-        return false;
+    var current = root;
+    while (current != null) {
+        if (current.value == value)
+            return true;
+        else if (current.value < value)
+            current = current.rightChild;
+        else if (current.value > value)
+            current = current.leftChild;
     }
+    return false;
+}
+//#endregion
+
+//#region Traversal
 
     // overload to pass the private parameter -  root
     public void PreOrdertraversal() {
@@ -110,8 +115,9 @@ public class ScratchTree {
         System.out.println(root.value);
 
     }
-
-    // height of the tree
+    //#endregion
+    
+//#region height of the tree
     public int HeightOfTree() {
         int height = HeightOfTree(root);
         return height;
@@ -127,6 +133,9 @@ public class ScratchTree {
         return 1 + Math.max(HeightOfTree(root.leftChild),
                 HeightOfTree(root.rightChild));
     }
+    //#endregion
+    
+//#region Find max value
     // To find a maximum value in the Binary Search Tree-> O(log N)
 
     public int MaxOfBST() {
@@ -157,10 +166,13 @@ public class ScratchTree {
         var rightMax = MaxOfBinaryTree(root.rightChild);
         return Math.max(Math.max(leftMax, rightMax), root.value);
     }
-
+    //#endregion
+   
     public boolean isLeaf(Node root) {
         return root.leftChild == null && root.rightChild == null;
     }
+
+//#region Find if two trees are equal
 
     /* Tree Equality Checking  ----- O(N)
      * Checks if two given trees are same and identical
@@ -191,5 +203,21 @@ public class ScratchTree {
 
         return false;
     }
+    //#endregion
+
+//#region Find if given tree is BST
+
+    public boolean isBST() {
+        return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    private boolean isBST(Node root, int min, int max) {
+        if(root == null)
+           return true;
+        if(root.value< min || root.value > max)
+            return false;
+        return isBST(root.leftChild, min, root.value - 1)
+            && isBST(root.rightChild, root.value + 1, max);
+    }
+//#endregion
 
 }

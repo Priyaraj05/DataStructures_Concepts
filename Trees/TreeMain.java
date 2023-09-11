@@ -28,10 +28,10 @@ public class TreeMain {
 
         ScratchTree tree2 = new ScratchTree();
         tree2.insert(7);
-        tree2.insert(4);
+        tree2.insert(5);
         tree2.insert(9);
         tree2.insert(1);
-        tree2.insert(6);
+        tree2.insert(16);
         tree2.insert(8);
         tree2.insert(10);
         
@@ -39,6 +39,8 @@ public class TreeMain {
             System.out.println("they are equal");
         else
             System.out.println("they are not equal");
+
+        System.out.println(tree.isBST());
 
     }
 }
