@@ -1,6 +1,7 @@
 
 
 import java.security.Provider;
+import java.util.ArrayList;
 
 public class ScratchTree {
 
@@ -218,6 +219,28 @@ public boolean find(int value) {
         return isBST(root.leftChild, min, root.value - 1)
             && isBST(root.rightChild, root.value + 1, max);
     }
-//#endregion
+    //#endregion
+
+//#region Get all the nodes at k distance from root
+
+    public ArrayList<Integer> NodesAt_K_Distance(int distance) {
+        ArrayList<Integer> list = new ArrayList<>();
+        NodesAt_K_Distance(root, distance, list);
+        return list;
+    }
+    
+    private void NodesAt_K_Distance(Node root, int distance, ArrayList<Integer> list) {
+        if (root == null)
+            return;
+        if (distance == 0) {
+            list.add(root.value);
+            return;        
+        }
+        
+        NodesAt_K_Distance(root.leftChild, --distance, list);
+        NodesAt_K_Distance(root.rightChild, distance, list);
+    }
+    //#endregion
+
 
 }

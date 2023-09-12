@@ -11,16 +11,16 @@ public class TreeMain {
         tree.insert(8);
         tree.insert(10);
         
-        System.out.println("done");
-        System.out.println(tree.find(7));
-        System.out.println(tree.find(11));
+        // System.out.println("done");
+        // System.out.println(tree.find(7));
+        // System.out.println(tree.find(11));
 
-        System.out.println("Pre Order : ");
-        tree.PreOrdertraversal();
-        System.out.println("In Order : ");
-        tree.InOrdertraversal();
-        System.out.println("Post Order : ");
-        tree.PostOrdertraversal();
+        // System.out.println("Pre Order : ");
+        // tree.PreOrdertraversal();
+        // System.out.println("In Order : ");
+        // tree.InOrdertraversal();
+        // System.out.println("Post Order : ");
+        // tree.PostOrdertraversal();
         
         System.out.println("Height: " + tree.HeightOfTree());
         System.out.println("Maximum value in tree: " + tree.MaxOfBinaryTree());
@@ -41,6 +41,6 @@ public class TreeMain {
             System.out.println("they are not equal");
 
         System.out.println(tree.isBST());
-
+        System.out.println("Nodes: "+ tree.NodesAt_K_Distance(2));
     }
 }
