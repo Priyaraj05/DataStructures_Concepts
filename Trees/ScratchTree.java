@@ -1,7 +1,10 @@
 
 
-import java.security.Provider;
+
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ScratchTree {
 
@@ -68,7 +71,34 @@ public boolean find(int value) {
 //#endregion
 
 //#region Traversal
+    //#region Breadth first traversal type
+    public void LevelOrderTraversal() {
+        LevelOrderTraversal(root);
+    }
 
+    private void LevelOrderTraversal(Node root) {
+        for (int i = 0; i <= HeightOfTree(); i++) {
+            System.out.println(NodesAt_K_Distance(i));
+        }
+    }
+
+    public void LevelOrderTraversalQueue() {
+        Queue<Node> queue = new ArrayDeque<>();
+        if(queue.isEmpty())
+            queue.add(root); 
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.remove();
+            System.out.print(currentNode.value + " ");
+            if (currentNode.leftChild != null)
+                queue.add(currentNode.leftChild);
+            if (currentNode.rightChild != null)
+                queue.add(currentNode.rightChild);
+
+        }
+    }
+    //#endregion
+
+    //#region Dept First Traversal types
     // overload to pass the private parameter -  root
     public void PreOrdertraversal() {
         PreOrdertraversal(root);
@@ -117,6 +147,7 @@ public boolean find(int value) {
 
     }
     //#endregion
+//#endregion
     
 //#region height of the tree
     public int HeightOfTree() {
